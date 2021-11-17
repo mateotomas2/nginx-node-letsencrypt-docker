@@ -31,6 +31,8 @@ services:
   nodejs:
     build: ./docker-images/nodejs
     restart: always
+    environment:
+      - PORT=80
     volumes:
       - ./nodejs:/src/nodejs
     ports:
