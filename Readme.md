@@ -21,3 +21,9 @@ To issue a letsencrypt certificate you can use:
 ```
 selfcertificate.sh
 ```
+
+## Nodejs
+
+You should run "npm install" by yourself. Recommended to do it from inside the container.
+The container will run "npm start" at the begining.
+You can access directly using the port 8080.
