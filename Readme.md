@@ -24,6 +24,7 @@ selfcertificate.sh
 
 ## Nodejs
 
+Clone your project inside a nodejs folder.
 You should run "npm install" by yourself. Recommended to do it from inside the container.
 The container will run "npm start" at the begining.
 You can access directly using the port 8080.
