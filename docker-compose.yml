@@ -1,0 +1,37 @@
+version: "3"
+
+services:
+  nginx:
+    build: ./docker-images/nginx
+    restart: always
+    volumes:
+      - ./docker-images/nginx/sites:/etc/nginx/conf.d
+      - ./data/certbot/conf:/etc/letsencrypt/
+      - ./data/certbot/www:/var/www/certbot
+    ports:
+      - 80:80
+      - 443:443
+    environment:
+      - "UID=1000"
+      - "GID=1000"
+    links:
+      - nodejs:nodejs
+
+  certbot:
+    image: certbot/certbot
+    restart: always
+    environment:
+      - "UID=1000"
+      - "GID=1000"
+    volumes:
+      - ./data/certbot/conf:/etc/letsencrypt
+      - ./data/certbot/www:/var/www/certbot
+    entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
+
+  nodejs:
+    build: ./docker-images/nodejs
+    restart: always
+    volumes:
+      - ./nodejs:/src/nodejs
+    ports:
+      - 8080:80
