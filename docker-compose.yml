@@ -20,7 +20,6 @@ services:
   certbot:
     image: certbot/certbot
     restart: always
-    user: 1000:1000
     environment:
       - "UID=1000"
       - "GID=1000"
