@@ -17,7 +17,7 @@ fi
 rsa_key_size=4096
 data_path="./data/certbot"
 email=${LETSENCRYPT_EMAIL} # Adding a valid address is strongly recommended
-staging=1 # Set to 1 if you're testing your setup to avoid hitting request limits
+staging=${LETSENCRYPT_STAGING} # Set to 1 if you're testing your setup to avoid hitting request limits
 
 echo "### Starting nginx ..."
 docker-compose up --force-recreate -d nginx
@@ -43,6 +43,13 @@ esac
 
 # Enable staging mode if needed
 if [ $staging != "0" ]; then staging_arg="--staging"; fi
+echo "certbot certonly --webroot -w /var/www/certbot \
+    $staging_arg \
+    $email_arg \
+    $domain_args \
+    --rsa-key-size $rsa_key_size \
+    --agree-tos \
+    --force-renewal"
 
 docker-compose run --rm --entrypoint "\
   certbot certonly --webroot -w /var/www/certbot \

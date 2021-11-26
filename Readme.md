@@ -4,7 +4,7 @@ A docker container to create a nodejs server with a nginx server and letsencrypt
 
 # How to use
 
-First of all create a .env file from the base sample and modify with your data
+First of all create a .env file from the base sample and modify with your data. I recommend issue the certificate first with LETSENCRYPT_STAGING=1 and later change it to LETSENCRYPT_STAGING=0 to avoid hitting rate limits.
 
 ```
 cp .env.example .env
